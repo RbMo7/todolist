@@ -18,3 +18,7 @@
 body{
     overflow-x: hidden;
 }
+
+#pend {
+    margin-right: -20px;
+}
