@@ -49,6 +49,7 @@ const TaskListInput = ({ callBack }: Props) => {
                 console.log((event.target as HTMLInputElement).value);
                 callBack((event.target as HTMLInputElement).value);
                 setMessage("");
+                
               }
             }}
             placeholder={click ? "Enter here" : "Press Enter to submit"}

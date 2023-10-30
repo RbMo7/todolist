@@ -3,28 +3,35 @@ import { useState } from "react";
 interface Props {
   items: string[];
   setItems: (item: string, num: number) => void;
+  callback: (item: string) => void;
+  completedTask: string[];
+  delCompleteTask: (item:string, num:number)=>void;
 }
 
-const TaskList = ({ items, setItems }: Props) => {
-  const [completedTask, addCompletedTask] = useState<string[]>([]);
+const TaskList = ({ items, setItems, callback, completedTask, delCompleteTask}: Props) => {
+  // const [completedTask, addCompletedTask] = useState<string[]>(JSON.parse(localStorage.getItem('Completed Task') || "[]"));
   const [isClicked, statusClicked] = useState(true);
 
   const deleteItem = (item: string, num: number) => {
     if (item != "") {
-      addCompletedTask([...completedTask, item]);
+      callback(item);
     }
     console.log("Completed task :", completedTask);
     setItems(item, num);
   };
 
+  // if(clear && count==0){
+  //   addCompletedTask([]);
+  //   console.log("Completed task cleared")
+  // }
+
   const deleteTask = (item: string, num: number) => {
-    addCompletedTask([
-      ...completedTask.slice(0, num),
-      ...completedTask.slice(num + 1),
-    ]);
-    console.log(item);
+    delCompleteTask(item, num);
   };
 
+  // if(clear){
+  //   addCompletedTask([]);
+  // }
   return (
     <>
       <div className="container text-center pt-2 pb-2">
