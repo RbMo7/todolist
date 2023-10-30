@@ -2,7 +2,7 @@
   "name": "todolist",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://rbmo7.github.io/todolist",
+  "homepage": "https://RbMo7.github.io/todolist",
   "type": "module",
   "scripts": {
     "dev": "vite",
