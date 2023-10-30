@@ -7,7 +7,9 @@ function App() {
     JSON.parse(localStorage.getItem("Pending Task") || "[]")
   );
 
-  const [completedTask, updateCompletedTask] = useState<string[]>(JSON.parse(localStorage.getItem("Completed Task") || "[]"));
+  const [completedTask, updateCompletedTask] = useState<string[]>(
+    JSON.parse(localStorage.getItem("Completed Task") || "[]")
+  );
 
   const addTask = (task: string) => {
     let temp = JSON.parse(localStorage.getItem("Pending Task") || "[]");
@@ -38,18 +40,19 @@ function App() {
     localStorage.setItem("Completed Task", JSON.stringify(temp));
     updateCompletedTask([...completedTask, task]);
     console.log("Completed task is: ", tasks);
-  }
+  };
 
-  const delCompleteTask = (item:string, num:number)=>{
+  const delCompleteTask = (num: number) => {
     const tempArr1 = completedTask;
     const tempArr2 = completedTask;
-    console.log("deleted item is ", item);
-    updateCompletedTask([...tempArr1.slice(0, num), ...tempArr2.slice(num + 1)]);
-    console.log("Completed task is:", completedTask);
+    updateCompletedTask([
+      ...tempArr1.slice(0, num),
+      ...tempArr2.slice(num + 1),
+    ]);
     let temp = JSON.parse(localStorage.getItem("Completed Task") || "[]");
     temp.splice(num, 1);
     localStorage.setItem("Completed Task", JSON.stringify(temp));
-  }
+  };
 
   const clearAll = () => {
     localStorage.clear();
@@ -57,8 +60,6 @@ function App() {
     updateCompletedTask([]);
     console.log("Cleared");
   };
-
-
 
   return (
     <div>
@@ -77,7 +78,13 @@ function App() {
       <div className="container">
         <TaskListInput callBack={addTask} />
       </div>
-      <TaskList items={tasks} setItems={delTask}  callback={addCompleteTask} completedTask={completedTask} delCompleteTask={delCompleteTask}/>
+      <TaskList
+        items={tasks}
+        setItems={delTask}
+        callback={addCompleteTask}
+        completedTask={completedTask}
+        delCompleteTask={delCompleteTask}
+      />
       <button
         className="btn btn-outline-primary"
         id="overlay-clear"

@@ -5,33 +5,29 @@ interface Props {
   setItems: (item: string, num: number) => void;
   callback: (item: string) => void;
   completedTask: string[];
-  delCompleteTask: (item:string, num:number)=>void;
+  delCompleteTask: (num: number) => void;
 }
 
-const TaskList = ({ items, setItems, callback, completedTask, delCompleteTask}: Props) => {
-  // const [completedTask, addCompletedTask] = useState<string[]>(JSON.parse(localStorage.getItem('Completed Task') || "[]"));
+const TaskList = ({
+  items,
+  setItems,
+  callback,
+  completedTask,
+  delCompleteTask,
+}: Props) => {
   const [isClicked, statusClicked] = useState(true);
 
   const deleteItem = (item: string, num: number) => {
     if (item != "") {
       callback(item);
     }
-    console.log("Completed task :", completedTask);
     setItems(item, num);
   };
 
-  // if(clear && count==0){
-  //   addCompletedTask([]);
-  //   console.log("Completed task cleared")
-  // }
-
-  const deleteTask = (item: string, num: number) => {
-    delCompleteTask(item, num);
+  const deleteTask = (num: number) => {
+    delCompleteTask(num);
   };
 
-  // if(clear){
-  //   addCompletedTask([]);
-  // }
   return (
     <>
       <div className="container text-center pt-2 pb-2">
@@ -99,7 +95,7 @@ const TaskList = ({ items, setItems, callback, completedTask, delCompleteTask}: 
               // console.log(num, item);
               return (
                 <li className="list-group-item " key={num}>
-                  <button className="btn" onClick={() => deleteTask(item, num)}>
+                  <button className="btn" onClick={() => deleteTask(num)}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
